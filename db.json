@@ -6,10 +6,18 @@
       "firstName": "Paul",
       "lastName": "Negoescu",
       "id": 1
+    },
+    {
+      "email": "p@pa.com",
+      "password": "$2a$10$kPINsn4D5fCxkdIjViqygeyHabhU8DQoAJesWcVop8yEqRyjOya5y",
+      "firstName": "Paul",
+      "lastName": "Negoescu",
+      "id": 2
     }
   ],
   "movies": [
     {
+      "id": 1,
       "title": "The Shawshank Redemption",
       "year": 1994,
       "rated": "R",
@@ -49,6 +57,7 @@
       "website": null
     },
     {
+      "id": 2,
       "title": "The Godfather",
       "year": 1972,
       "rated": "R",
@@ -88,6 +97,7 @@
       "website": null
     },
     {
+      "id": 3,
       "title": "The Dark Knight",
       "year": 2008,
       "rated": "PG-13",
@@ -127,6 +137,7 @@
       "website": null
     },
     {
+      "id": 4,
       "title": "The Godfather: Part II",
       "year": 1974,
       "rated": "R",
@@ -166,6 +177,7 @@
       "website": null
     },
     {
+      "id": 5,
       "title": "12 Angry Men",
       "year": 1957,
       "rated": "Approved",
@@ -205,6 +217,7 @@
       "website": null
     },
     {
+      "id": 6,
       "title": "The Lord of the Rings: The Return of the King",
       "year": 2003,
       "rated": "PG-13",
@@ -244,6 +257,7 @@
       "website": null
     },
     {
+      "id": 7,
       "title": "Pulp Fiction",
       "year": 1994,
       "rated": "R",
@@ -283,6 +297,7 @@
       "website": null
     },
     {
+      "id": 8,
       "title": "Schindler's List",
       "year": 1993,
       "rated": "R",
@@ -322,6 +337,7 @@
       "website": null
     },
     {
+      "id": 9,
       "title": "Inception",
       "year": 2010,
       "rated": "PG-13",
@@ -361,6 +377,7 @@
       "website": null
     },
     {
+      "id": 10,
       "title": "Fight Club",
       "year": 1999,
       "rated": "R",
@@ -400,6 +417,7 @@
       "website": null
     },
     {
+      "id": 11,
       "title": "The Lord of the Rings: The Fellowship of the Ring",
       "year": 2001,
       "rated": "PG-13",
@@ -439,6 +457,7 @@
       "website": null
     },
     {
+      "id": 12,
       "title": "Forrest Gump",
       "year": 1994,
       "rated": "PG-13",
@@ -478,6 +497,7 @@
       "website": null
     },
     {
+      "id": 13,
       "title": "The Good, the Bad and the Ugly",
       "year": 1966,
       "rated": "R",
@@ -517,6 +537,7 @@
       "website": null
     },
     {
+      "id": 14,
       "title": "The Lord of the Rings: The Two Towers",
       "year": 2002,
       "rated": "PG-13",
@@ -556,6 +577,7 @@
       "website": null
     },
     {
+      "id": 15,
       "title": "The Matrix",
       "year": 1999,
       "rated": "R",
@@ -595,6 +617,7 @@
       "website": null
     },
     {
+      "id": 16,
       "title": "Goodfellas",
       "year": 1990,
       "rated": "R",
@@ -634,6 +657,7 @@
       "website": null
     },
     {
+      "id": 17,
       "title": "Star Wars: Episode V - The Empire Strikes Back",
       "year": 1980,
       "rated": "PG",

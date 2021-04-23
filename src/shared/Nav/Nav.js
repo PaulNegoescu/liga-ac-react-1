@@ -1,20 +1,36 @@
 import { NavLink } from 'react-router-dom';
 
+import styles from './Nav.module.css';
+
 export function Nav() {
   return (
     <nav>
-      <ul>
+      <ul className={styles['main-menu']}>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink activeClassName={styles.active} exact to="/">
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/counter">Counter</NavLink>
+          <NavLink activeClassName={styles.active} to="/counter">
+            Counter
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/register">Register</NavLink>
+          <NavLink activeClassName={styles.active} to="/movies">
+            Movies
+          </NavLink>
+        </li>
+
+        <li className={styles['right-align']}>
+          <NavLink activeClassName={styles.active} to="/login">
+            Login
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink activeClassName={styles.active} to="/register">
+            Register
+          </NavLink>
         </li>
       </ul>
     </nav>

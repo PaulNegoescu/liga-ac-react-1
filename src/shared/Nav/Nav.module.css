@@ -1,0 +1,15 @@
+.active {
+  color: #c00;
+}
+
+.main-menu {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.right-align {
+  margin-left: auto;
+}

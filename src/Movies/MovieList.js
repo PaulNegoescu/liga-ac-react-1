@@ -1,25 +1,34 @@
 import { useEffect, useState } from 'react';
+import { Movie } from './Movie';
+
+import styles from './Movie.module.css';
 
 export function MovieList() {
-  const [state, setState] = useState(0);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/movies?_limit=10')
-      .then((res) => res.json())
-      .then(console.log);
-  }, []);
+    async function getMovies() {
+      const data = await fetch(
+        'http://localhost:3001/movies?_limit=10'
+      ).then((res) => res.json());
 
+      setMovies(data);
+    }
+
+    getMovies();
+
+    return () => {
+      //cleanup
+    };
+  }, []);
   return (
     <>
       <h1>Movie List</h1>
-
-      <article>
-        <a href="#">
-          <img src="" alt="Batman Begins Poster" />
-          <h2>Batman Begins</h2>
-        </a>
-      </article>
-      <button onClick={() => setState(state + 1)}>Increase</button>
+      {movies.length === 0 && <h2>Loading ... </h2>}
+      <main className={styles['movie-list']}>
+        {movies.length !== 0 &&
+          movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+      </main>
     </>
   );
 }

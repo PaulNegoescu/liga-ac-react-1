@@ -1,0 +1,27 @@
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.card {
+  text-align: center;
+}
+
+.card a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card a:hover {
+  background: #efefef;
+}
+
+.card img {
+  height: 33vw;
+}
