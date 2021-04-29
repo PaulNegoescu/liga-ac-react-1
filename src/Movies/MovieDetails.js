@@ -1,26 +1,15 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useFetch } from '../shared/useFetch';
 
 export function MovieDetails() {
-  const [movie, setMovie] = useState(null);
   const { id } = useParams();
-
-  useEffect(() => {
-    async function getMovie() {
-      const data = await fetch(
-        `http://localhost:3001/movies/${id}`
-      ).then((res) => res.json());
-
-      setMovie(data);
-    }
-
-    getMovie();
-  }, [id]);
-
-  if (!movie) {
+  const { data: movie, isLoading } = useFetch(`/movies/${id}`, false, [id]);
+  console.log('render');
+  if (isLoading) {
     return <h2>Loading ...</h2>;
   }
+
   return (
     <>
       <h1>{movie.title}</h1>

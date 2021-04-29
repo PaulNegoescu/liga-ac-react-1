@@ -1,27 +1,28 @@
 import { useState } from 'react';
+import { apiUrl } from '../shared/config';
+import { useFetch } from '../shared/useFetch';
+import { useAuthContext } from './AuthContext';
 
 export function Login() {
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
+  const { onLogin } = useAuthContext();
+  const { mutate } = useFetch('/auth/signin', false);
 
   function handleInputChange(e) {
     setValues({ ...values, [e.target.id]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    fetch('http://localhost:3001/auth/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    })
-      .then((res) => res.json())
-      .then(console.log);
+    const response = await mutate(values, 'POST');
+
+    if (response.accessToken) {
+      onLogin(response.accessToken);
+    }
   }
 
   return (

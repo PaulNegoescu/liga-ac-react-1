@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiUrl } from '../shared/config';
 
 export function Register() {
   const [values, setValues] = useState({
@@ -35,7 +36,7 @@ export function Register() {
     return isValid;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     // const safeValues = { ...values };
     // delete safeValues.retypePassword;
@@ -44,15 +45,15 @@ export function Register() {
       return;
     }
 
-    fetch('http://localhost:3001/auth/register', {
+    const response = await fetch(apiUrl + '/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(safeValues),
-    })
-      .then((res) => res.json())
-      .then(console.log);
+    }).then((res) => res.json());
+
+    console.log(response);
   }
 
   return (
