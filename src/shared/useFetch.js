@@ -1,77 +1,78 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useAuthContext } from '../Auth/AuthContext';
 import { apiUrl } from './config';
 
+const headers = {
+  'Content-Type': 'application/json',
+};
+
 // useFetch('/users');
-export function useFetch(endpoint, auth = false, dependencies = null) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(Array.isArray(dependencies));
-  const [errors, setErrors] = useState({});
+export function useFetch(endpoint, auth = false, runImmediately = false) {
+  const [state, dispatch] = useReducer(reducer, {
+    data: null,
+    isLoading: runImmediately,
+    errors: null,
+  });
   const { token } = useAuthContext();
 
-  let deps = [];
+  function reducer(oldState, action) {
+    const newState = { ...oldState };
+    switch (action.type) {
+      case 'REQUESTED_DATA':
+        newState.isLoading = true;
+        break;
+      case 'RECEIVED_DATA':
+        newState.data = action.payload;
+        newState.isLoading = false;
+        break;
+      case 'SET_ERRORS':
+        newState.errors = action.payload;
+        newState.isLoading = false;
+        break;
+      default:
+        return oldState;
+    }
 
-  if (Array.isArray(dependencies)) {
-    deps = [...dependencies];
+    return newState;
   }
 
-  const headers = {
-    'Content-Type': 'application/json',
-  };
   if (auth) {
     headers.Authorization = `Bearer: ${token}`;
   }
 
   useEffect(() => {
-    if (dependencies) {
+    if (runImmediately) {
       fetch(apiUrl + endpoint, {
         method: 'GET',
         headers,
       })
         .then(handleResponse)
         .then((stuff) => {
-          setData(stuff);
-          setIsLoading(false);
+          dispatch({ type: 'RECEIVED_DATA', payload: stuff });
         });
     }
-  }, [...deps, endpoint]);
+  }, [runImmediately, endpoint]);
 
   function handleResponse(res) {
     console.log(res);
     return res.json();
   }
 
-  const ret = useMemo(() => {
-    const stuff = {
-      data,
-      isLoading,
-      errors,
-      mutate,
-    };
+  async function mutate(data, method = 'PUT') {
+    dispatch({ type: 'REQUESTED_DATA' });
+    const res = await fetch(apiUrl + endpoint, {
+      method,
+      headers,
+      body: data && JSON.stringify(data),
+    }).then(handleResponse);
 
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    if (auth) {
-      headers.Authorization = `Bearer: ${token}`;
-    }
+    dispatch({ type: 'RECEIVED_DATA', payload: res });
 
-    async function mutate(data, method = 'PUT') {
-      setIsLoading(true);
-      const res = await fetch(apiUrl + endpoint, {
-        method,
-        headers,
-        body: data && JSON.stringify(data),
-      }).then(handleResponse);
+    return res;
+  }
 
-      setData(res);
-      setIsLoading(false);
-
-      return res;
-    }
-
-    return stuff;
-  }, [data, isLoading, errors, endpoint, auth, token]);
-
-  return ret;
+  return {
+    ...state,
+    mutate,
+  };
 }

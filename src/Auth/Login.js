@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { apiUrl } from '../shared/config';
 import { useFetch } from '../shared/useFetch';
 import { useAuthContext } from './AuthContext';
 

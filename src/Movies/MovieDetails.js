@@ -4,8 +4,8 @@ import { useFetch } from '../shared/useFetch';
 
 export function MovieDetails() {
   const { id } = useParams();
-  const { data: movie, isLoading } = useFetch(`/movies/${id}`, false, [id]);
-  console.log('render');
+  const { data: movie, isLoading } = useFetch(`/movies/${id}`, false, true);
+
   if (isLoading) {
     return <h2>Loading ...</h2>;
   }

@@ -4,7 +4,11 @@ import { Movie } from './Movie';
 import styles from './Movie.module.css';
 
 export function MovieList() {
-  const { data: movies, isLoading } = useFetch('/movies?_limit=10', false, []);
+  const { data: movies, isLoading } = useFetch(
+    '/movies?_limit=10',
+    false,
+    true
+  );
 
   return (
     <>
